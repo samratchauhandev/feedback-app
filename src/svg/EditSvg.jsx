@@ -1,8 +1,8 @@
 import SvgIcon from "@mui/material/SvgIcon";
 
-function EditSvg({ sx }) {
+function EditSvg({ sx ,onClick}) {
   return (
-    <SvgIcon sx={{ width: "18px", height: "18px", ...sx }}>
+    <SvgIcon sx={{ width: "18px", height: "18px", ...sx }} onClick={onClick}>
       <svg
         viewBox="0 0 18 18"
         fill="none"

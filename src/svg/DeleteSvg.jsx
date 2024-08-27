@@ -1,8 +1,8 @@
 import SvgIcon from "@mui/material/SvgIcon";
 
-function DeleteSvg({ sx }) {
+function DeleteSvg({ sx, onClick }) {
   return (
-    <SvgIcon sx={{ width: "14px", height: "18px", ...sx }}>
+    <SvgIcon sx={{ width: "14px", height: "18px", ...sx }} onClick={onClick}>
       <svg
         width="14"
         height="18"

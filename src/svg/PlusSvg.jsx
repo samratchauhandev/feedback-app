@@ -1,9 +1,9 @@
 import React from "react";
 import SvgIcon from "@mui/material/SvgIcon";
 
-function PlusSvg({sx}) {
+function PlusSvg({sx,onClick}) {
   return (
-    <SvgIcon sx={{width:"91px", height:"91px", ...sx}} >
+    <SvgIcon sx={{width:"91px", height:"91px", ...sx}} onClick={onClick}>
       <svg
         viewBox="0 0 91 91"
         fill="none"
@@ -12,9 +12,9 @@ function PlusSvg({sx}) {
         <path
           d="M15.1665 45.5H75.8332M45.4998 15.1667V75.8333"
           stroke="#2F4ED7"
-          stroke-width="7.58333"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="7.58333"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
       </svg>
     </SvgIcon>
