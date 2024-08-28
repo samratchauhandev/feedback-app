@@ -1,9 +1,7 @@
 import { Box, TextField, Typography } from "@mui/material";
-import React, { useState } from "react";
+import React from "react";
 
-function TextArea({label,ans}) {
-
-  const[state,setState]=useState('')
+function TextArea({label}) {
 
   return (
     <Box>

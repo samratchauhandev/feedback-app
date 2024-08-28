@@ -1,5 +1,10 @@
-import { Box, TextField, Typography } from "@mui/material";
-import React, { useState } from "react";
+import {
+  Box,
+  Switch,
+  TextField,
+  Typography,
+} from "@mui/material";
+import React from "react";
 import TextAreaSvg from "../../svg/TextAreaSvg";
 import NumericRatingSvg from "../../svg/NumericRatingSvg";
 import StarRatingSvg from "../../svg/StarRatingSvg";
@@ -33,13 +38,13 @@ const svgs = [
 ];
 
 const formStructure = {
-  heading: "Generic Website Rating",
   fields: [
     {
       label: "Would you like to add a comment?",
       type: "textbox",
       ans: "",
       error: "",
+      is_required: false,
     },
     {
       label:
@@ -47,68 +52,74 @@ const formStructure = {
       type: "numberic_rating",
       ans: 10,
       error: "",
+      is_required: false,
     },
     {
       label: "Give a star rating for the website.",
       type: "star_rating",
       ans: 5,
       error: "",
+      is_required: false,
     },
     {
       label: "What is your opinion of this page?",
       type: "smile_rating",
       ans: 5,
       error: "",
+      is_required: false,
     },
     {
       label: "Do you have any suggestions to improve our website?",
       type: "single_input",
       ans: "",
       error: "",
+      is_required: false,
     },
     {
       label: "Multiple choice - 1 answer",
       type: "radio_btn",
       ans: [],
       error: "",
-      options:[
-       {subLabel:"radio_btn1"},
-       {subLabel:"radio_btn2"},
-       {subLabel:"radio_btn3"}
-      ]
+      is_required: false,
+      options: [
+        { subLabel: "Radio 1" },
+        { subLabel: "Radio 2" },
+        { subLabel: "Radio 3" },
+      ],
     },
     {
       label: "Pick a subject and provide your feedback:",
       type: "categories",
       ans: "",
       error: "",
-      options:[
-        {subLabel:"BUG"},
-        {subLabel:"CONTENT"},
-        {subLabel:"OTHER"},
-      ]
+      is_required: false,
+      options: [
+        { subLabel: "BUG" },
+        { subLabel: "CONTENT" },
+        { subLabel: "OTHER" },
+      ],
     },
   ],
 };
 
 function SideBar() {
-  const { setFields ,editState } = useFeedback();
-
+  const {  editState, setForm } = useFeedback();
 
   const handleEditState = (selectType) => {
     const selectedField = formStructure.fields.find(
       (item) => item.type === selectType
     );
-    setFields((prev) => [...prev, selectedField]);
+    // setFields((prev) => [...prev, selectedField]);
+    setForm((prev) => ({...prev, elements: [...prev.elements ,selectedField]}))
     console.log(selectedField, editState);
   };
 
   return (
     <Box
       sx={{
-        position: "fixed",
+        position: "absolute",
         right: 0,
-        top: 67,
+        top: 0,
         width: "317px",
         height: "100%",
         backgroundColor: "#FFFFFF",
@@ -124,7 +135,7 @@ function SideBar() {
             <Typography sx={{ fontSize: "20px", fontWeight: "600", mb: 2 }}>
               Add fields
             </Typography>
-            <Box paddingTop="24px">
+            <Box paddingTop="16px">
               {addFields.map((item, idx) => {
                 const SvgComponent = svgs[idx];
                 return (
@@ -133,7 +144,7 @@ function SideBar() {
                     sx={{
                       display: "flex",
                       justifyContent: "space-between",
-                      my: 4,
+                      my: 3,
                     }}
                   >
                     <Box display="flex">
@@ -149,14 +160,22 @@ function SideBar() {
               })}
             </Box>
           </Box>
-          <Box sx={{ mt: 10 }}>
+          <Box sx={{ mt: 6 }}>
             <Typography fontSize="20px" fontWeight="600">
               Add logic
             </Typography>
             <Box>
-              <Box sx={{ my: 2 }}>
-                <Typography fontSize="14px">
-                  Show based on URL conditions
+              <Box>
+                <Typography
+                  fontSize="14px"
+                  sx={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    my: 2,
+                  }}
+                >
+                  Show based on URL conditions <Switch defaultChecked />
                 </Typography>
                 <TextField
                   id="standard-basic"
@@ -164,8 +183,18 @@ function SideBar() {
                   placeholder="http://"
                 />
               </Box>
-              <Box sx={{ my: 2 }}>
-                <Typography fontSize="14px">Show on a specific date</Typography>
+              <Box>
+                <Typography
+                  fontSize="14px"
+                  sx={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    my: 2,
+                  }}
+                >
+                  Show on a specific date <Switch defaultChecked />
+                </Typography>
                 <TextField
                   id="outlined-basic"
                   label="Start date"
@@ -173,8 +202,18 @@ function SideBar() {
                   placeholder="MM/DD/YYYY"
                 />
               </Box>
-              <Box sx={{ my: 2 }}>
-                <Typography fontSize="14px">Show on a specific time</Typography>
+              <Box>
+                <Typography
+                  fontSize="14px"
+                  sx={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    my: 2,
+                  }}
+                >
+                  Show on a specific time <Switch defaultChecked />
+                </Typography>
                 <TextField
                   id="outlined-basic"
                   label="Select Time"
@@ -186,7 +225,7 @@ function SideBar() {
           </Box>
         </Box>
       ) : (
-        <FieldEdit  />
+        <FieldEdit />
       )}
     </Box>
   );

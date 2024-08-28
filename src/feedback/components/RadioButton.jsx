@@ -5,11 +5,10 @@ import {
   FormLabel,
   Radio,
   RadioGroup,
-  Typography,
 } from "@mui/material";
 import React, { useState } from "react";
 
-function RadioButton({label}) {
+function RadioButton({label, options}) {
   const [value, setValue] = useState("female");
 
   const handleChange = (event) => {
@@ -27,21 +26,15 @@ function RadioButton({label}) {
           value={value}
           onChange={handleChange}
         >
-          <FormControlLabel
-            value="Radio 1"
-            control={<Radio />}
-            label="Radio 1"
-          />
-          <FormControlLabel
-            value="Radio 2"
-            control={<Radio />}
-            label="Radio 2"
-          />
-          <FormControlLabel
-            value="Radio 3"
-            control={<Radio />}
-            label="Radio 3"
-          />
+          {
+            options.map(({subLabel},idx)=>
+            <FormControlLabel
+              value={subLabel}
+              control={<Radio />}
+              label={subLabel}
+            />
+             )
+          }
         </RadioGroup>
       </FormControl>
     </Box>

@@ -8,39 +8,47 @@ import SentimentVerySatisfiedIcon from "@mui/icons-material/SentimentVerySatisfi
 
 const customIcons = {
   1: {
-    icon: <SentimentVeryDissatisfiedIcon color="error" />,
+    icon: SentimentVeryDissatisfiedIcon,
     label: "Very Dissatisfied",
+    fontSize: '30px',
   },
   2: {
-    icon: <SentimentDissatisfiedIcon color="error" />,
+    icon: SentimentDissatisfiedIcon,
     label: "Dissatisfied",
+    fontSize: '30px',
   },
   3: {
-    icon: <SentimentSatisfiedIcon color="warning" />,
+    icon: SentimentSatisfiedIcon,
     label: "Neutral",
+    fontSize: '30px',
   },
   4: {
-    icon: <SentimentSatisfiedAltIcon color="success" />,
+    icon: SentimentSatisfiedAltIcon,
     label: "Satisfied",
+    fontSize: '30px',
   },
   5: {
-    icon: <SentimentVerySatisfiedIcon color="success" />,
+    icon: SentimentVerySatisfiedIcon,
     label: "Very Satisfied",
+    fontSize: '30px',
   },
 };
 
-function SmileyRating({label}) {
+function SmileyRating({ label }) {
   return (
     <Box>
       <Typography sx={{ fontSize: "14px", my: 2 }}>
         {label}
       </Typography>
       <Box sx={{ display: "flex", justifyContent: "start" }}>
-        {Object.keys(customIcons).map((key) => (
-          <Box key={key} sx={{ mx: 1 }}>
-            {customIcons[key].icon}
-          </Box>
-        ))}
+        {Object.keys(customIcons).map((key) => {
+          const IconComponent = customIcons[key].icon;
+          return (
+            <Box key={key} sx={{ mx: 1 }}>
+              <IconComponent sx={{ fontSize: customIcons[key].fontSize ,color: '#888888' }} />
+            </Box>
+          );
+        })}
       </Box>
     </Box>
   );

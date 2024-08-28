@@ -1,45 +1,24 @@
-// import './App.css';
-// import { Box, Container } from '@mui/material';
-// import Home from './dashboard/Home';
-// import { Route, Routes } from 'react-router-dom';
-// import FeedBackForm from './feedback/forms/FeedBackForm';
-// import Feedback from './feedback';
-
-
-// function App() {
-//   return (
-//     <Container maxWidth='1920px' sx={{
-//       backgroundColor: '#F3F3F3', height: '100vh'
-//     }}>
-//       <Box>
-//         <Routes>
-//           <Route path="/" element={< Home />} />
-//           {/* <Route path="/form" element={< Feedback />} />
-//           <Route path="/form" element={< FeedBackForm />} /> */}
-//         </Routes>
-//       </ Box>
-//     </Container>
-//   );
-// }
-
-// export default App;
-
 import './App.css';
-import { Box, Container } from '@mui/material';
+import { Box } from '@mui/material';
 import Home from './dashboard/Home';
 import { Route, Routes } from 'react-router-dom';
 
 function App() {
   return (
-    <Container maxWidth="1920px" sx={{
-      backgroundColor: '#F3F3F3', height: '100vh'
+    <Box sx={{
+      backgroundColor: '#F3F3F3', height: '100vh',
+      maxWidth: "1920px",
+      display: "flex",
+      flexDirection: "column",
+      margin: 'auto',
+      boxShadow: "0px 4px 4px 0px #00000040",
+      overflow:'auto'
+      
     }}>
-      <Box>
-        <Routes>
-          <Route path="/*" element={<Home />} />
-        </Routes>
-      </Box>
-    </Container>
+      <Routes>
+        <Route path="/*" element={<Home />} />
+      </Routes>
+    </Box>
   );
 }
 

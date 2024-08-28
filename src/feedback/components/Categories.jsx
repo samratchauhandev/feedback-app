@@ -1,15 +1,14 @@
 import { Box, Button, Typography } from "@mui/material";
 import React from "react";
 
-function Categories({ label }) {
-  const categories = ["Bug", "Content", "Other"];
+function Categories({ label, options }) {
 
   return (
     <Box>
       <Typography sx={{ fontSize: "14px", my: 2 }}>{label}</Typography>
 
       <Box>
-        {categories.map((item, idx) => (
+        {options.map(({subLabel}, idx) => (
           <Button
             key={idx}
             sx={{
@@ -19,7 +18,7 @@ function Categories({ label }) {
               color: "#504F4F",
             }}
           >
-            {item}
+            {subLabel}
           </Button>
         ))}
       </Box>

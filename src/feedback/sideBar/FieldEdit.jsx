@@ -11,24 +11,26 @@ import LeftHandArrowSvg from "../../svg/LeftHandArrowSvg";
 import useFeedback from "../hooks/useFeedback";
 
 function FieldEdit() {
-  const { setFields, fields, editState, setEditState } = useFeedback();
+  const { editState, setEditState, form, setForm } =
+    useFeedback();
 
   // Find the field based on the index
-  const textLabel = fields.find((_, idx) => idx === editState.index);
+  const textLabel = form.elements.find((_, idx) => idx === editState.index);
 
   const callBackHandler = () => {
     setEditState((prev) => ({ ...prev, state: true }));
   };
 
   const handleInputChange = (event, key) => {
-    const updatedFields = fields.map((field, idx) =>
+    const updatedFields = form.elements.map((field, idx) =>
       idx === editState.index ? { ...field, [key]: event.target.value } : field
     );
-    setFields(updatedFields);
+    // setFields(updatedFields);
+    setForm((prev) => ({ ...prev, elements: updatedFields }));
   };
-
+  console.log(form);
   const handleOptionChange = (event, subIndex) => {
-    const updatedFields = fields.map((field, idx) => {
+    const updatedFields = form.elements.map((field, idx) => {
       if (idx === editState.index) {
         const updatedOptions = field.options.map((option, optIdx) =>
           optIdx === subIndex
@@ -39,7 +41,19 @@ function FieldEdit() {
       }
       return field;
     });
-    setFields(updatedFields);
+    // setFields(updatedFields);
+    setForm((prev) => ({ ...prev, elements: updatedFields }));
+  };
+
+  const handleSwitchChange = (event) => {
+    const updatedFields = form.elements.map((field, idx) => {
+      if (idx === editState.index) {
+        return { ...field, is_required: event.target.checked };
+      }
+      return field;
+    });
+    // setFields(updatedFields);
+    setForm((prev) => ({ ...prev, elements: updatedFields }));
   };
 
   return (
@@ -62,7 +76,15 @@ function FieldEdit() {
         sx={{ my: 3 }}
         onChange={(e) => handleInputChange(e, "label")}
       />
-      <FormControlLabel control={<Switch defaultChecked/>} label="Required" />
+      <FormControlLabel
+        control={
+          <Switch
+            checked={textLabel.is_required}
+            onChange={handleSwitchChange}
+          />
+        }
+        label="Required"
+      />
       {textLabel?.type !== "radio_btn" && textLabel?.type !== "categories" ? (
         <TextField
           id="error"
@@ -82,7 +104,7 @@ function FieldEdit() {
               id="subLabel"
               variant="standard"
               sx={{ my: 2 }}
-              onChange={(e) => handleOptionChange(e, "subLabel")}
+              onChange={(e) => handleOptionChange(e, subIdx)}
             />
           ))}
         </Box>

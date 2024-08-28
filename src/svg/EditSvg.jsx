@@ -1,6 +1,6 @@
 import SvgIcon from "@mui/material/SvgIcon";
 
-function EditSvg({ sx ,onClick}) {
+function EditSvg({ sx , onClick}) {
   return (
     <SvgIcon sx={{ width: "18px", height: "18px", ...sx }} onClick={onClick}>
       <svg
