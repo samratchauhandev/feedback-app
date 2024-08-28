@@ -41,7 +41,6 @@ function Header() {
           USER FEEDBACK
         </Typography>
       </Box>
-      {location.pathname === "/forms/*" && (
         <Box>
           <Button
             variant="contained"
@@ -62,7 +61,6 @@ function Header() {
             Publish
           </Button>
         </Box>
-      )}
     </Box>
   );
 }

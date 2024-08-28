@@ -12,7 +12,8 @@ function Home() {
       <FeedbackProvider>
         <Header />
         <Routes>
-          <Route path="/forms/*" element={<DashboardCard />} />
+        <Route path="/" element={<DashboardCard />} />
+          <Route path="forms/" element={<DashboardCard />} />
           <Route path="forms/*" element={<Feedback />} />
         </Routes>
       </FeedbackProvider>

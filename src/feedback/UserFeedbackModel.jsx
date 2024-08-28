@@ -40,8 +40,8 @@ function UserFeedbackModel() {
     // const today = new Date().toISOString().split('T')[0]; // format YYYY-MM-DD
     // const currentTime = new Date().toISOString().split('T')[1].split('.')[0]; // format HH:MM:SS
 
-    const popupUrl = "http://localhost:3000/services";
-    const notificationUrl = "http://localhost:3000/about";
+    const servicesUrl = "http://localhost:3000/services";
+    const aboutUrl = "http://localhost:3000/about";
 
     const shouldOpenModal =
       (location.pathname === "/about" || location.pathname === "/services") 
@@ -52,7 +52,7 @@ function UserFeedbackModel() {
     if (shouldOpenModal ) {
       const timer = setTimeout(() => {
         setOpen(true);
-      }, 30000); // 30 seconds
+      }, 3000); // 3 seconds
 
       return () => clearTimeout(timer); // Clean up timeout if the component unmounts
     }
