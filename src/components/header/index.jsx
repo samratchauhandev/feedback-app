@@ -1,8 +1,22 @@
 import { Box, Button, Typography } from "@mui/material";
 import React from "react";
 import logo from "../../assets/image.png";
+import useFeedback from "../../feedback/hooks/useFeedback";
+import { useLocation } from "react-router-dom";
 
 function Header() {
+  const { form, setTotalForms, totalForms } = useFeedback();
+  const location = useLocation();
+
+  const handlePublish = () => {
+    localStorage.setItem("forms", JSON.stringify(form));
+  };
+
+  const handleSave = () => {
+    setTotalForms((prev) => [...prev, form]);
+    console.log(totalForms);
+  };
+
   return (
     <Box
       sx={{
@@ -27,24 +41,28 @@ function Header() {
           USER FEEDBACK
         </Typography>
       </Box>
-      <Box>
-        <Button
-          variant="contained"
-          color="primary"
-          size="large"
-          sx={{ mx: "19px" }}
-        >
-          Save
-        </Button>
-        <Button
-          variant="contained"
-          color="success"
-          size="large"
-          sx={{ mx: "14px" }}
-        >
-          Publish
-        </Button>
-      </Box>
+      {location.pathname === "/forms/*" && (
+        <Box>
+          <Button
+            variant="contained"
+            color="primary"
+            size="large"
+            sx={{ mx: "19px" }}
+            onClick={handleSave}
+          >
+            Save
+          </Button>
+          <Button
+            variant="contained"
+            color="success"
+            size="large"
+            sx={{ mx: "14px" }}
+            onClick={handlePublish}
+          >
+            Publish
+          </Button>
+        </Box>
+      )}
     </Box>
   );
 }

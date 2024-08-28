@@ -6,17 +6,13 @@ import DashboardCard from "../components/DashboardCard";
 import Feedback from "../feedback";
 
 function Home() {
+
   return (
     <>
-      <Header />
       <FeedbackProvider>
+        <Header />
         <Routes>
-          <Route
-            path="forms/"
-            element={
-                <DashboardCard />
-            }
-          />
+          <Route path="/forms/*" element={<DashboardCard />} />
           <Route path="forms/*" element={<Feedback />} />
         </Routes>
       </FeedbackProvider>

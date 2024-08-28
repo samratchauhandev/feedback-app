@@ -1,5 +1,5 @@
 import { Box, Typography } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import SentimentVeryDissatisfiedIcon from "@mui/icons-material/SentimentVeryDissatisfied";
 import SentimentDissatisfiedIcon from "@mui/icons-material/SentimentDissatisfied";
 import SentimentSatisfiedIcon from "@mui/icons-material/SentimentSatisfied";
@@ -10,31 +10,32 @@ const customIcons = {
   1: {
     icon: SentimentVeryDissatisfiedIcon,
     label: "Very Dissatisfied",
-    fontSize: '30px',
   },
   2: {
     icon: SentimentDissatisfiedIcon,
     label: "Dissatisfied",
-    fontSize: '30px',
   },
   3: {
     icon: SentimentSatisfiedIcon,
     label: "Neutral",
-    fontSize: '30px',
   },
   4: {
     icon: SentimentSatisfiedAltIcon,
     label: "Satisfied",
-    fontSize: '30px',
   },
   5: {
     icon: SentimentVerySatisfiedIcon,
     label: "Very Satisfied",
-    fontSize: '30px',
   },
 };
 
 function SmileyRating({ label }) {
+  const [selected, setSelected] = useState(null);
+
+  const handleClick = (key) => {
+    setSelected(key);
+  };
+
   return (
     <Box>
       <Typography sx={{ fontSize: "14px", my: 2 }}>
@@ -43,9 +44,24 @@ function SmileyRating({ label }) {
       <Box sx={{ display: "flex", justifyContent: "start" }}>
         {Object.keys(customIcons).map((key) => {
           const IconComponent = customIcons[key].icon;
+          const isSelected = selected === parseInt(key);
           return (
-            <Box key={key} sx={{ mx: 1 }}>
-              <IconComponent sx={{ fontSize: customIcons[key].fontSize ,color: '#888888' }} />
+            <Box
+              key={key}
+              sx={{
+                mx: 1,
+                cursor: "pointer",
+                transform: isSelected ? "scale(1.2)" : "scale(1)",
+                transition: "transform 0.2s",
+              }}
+              onClick={() => handleClick(parseInt(key))}
+            >
+              <IconComponent
+                sx={{
+                  fontSize: "30px",
+                  color: isSelected ? "#5578F4" : "#888888",
+                }}
+              />
             </Box>
           );
         })}
